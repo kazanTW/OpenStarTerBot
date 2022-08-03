@@ -17,4 +17,4 @@ async def on_message(message):
 #     await member.channel.send(f'Welcome to 開源星手村, {member}')
 
 if __name__ == '__main__':
-    client.run('MTAwNDM0MDM5NjMyOTAyOTY5Mg.GEKPT3.473tO9U9iP9BUPOE5FfiMiGUZ745iAo_yCegek')
+    client.run('TOKEN')
