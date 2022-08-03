@@ -1,2 +1,2 @@
 # OpenStarTerBot
-Auto DIscord bot for OpenStarTerVillage.
+Auto Discord bot for OpenStarTerVillage.
