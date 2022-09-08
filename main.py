@@ -1,13 +1,18 @@
 import discord
-client = discord.Client()
+from discord.ext import commands
+import os
+from dotenv import load_dotenv
 
-@client.event
+load_dotenv()
+bot = commands.Bot(command_prefix="$")
+
+@bot.event
 async def on_ready():
-    print(f'Now login as: {client.user}')
+    print(f'Now login as: {bot.user}')
     
-@client.event
+@bot.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == bot.user:
         return
     if message.content.startswith('Hi'):
         tmp = message.content.split(' ', 1)
@@ -16,10 +21,9 @@ async def on_message(message):
         else:
             await message.channel.send(f'{message.author.mention} 說了 「{tmp[1]}」')
 
-# @client.event
+# @bot.event
 # async def on_member_join(member):
 #     await member.channel.send(f'Welcome to 開源星手村, {member}')
 
 if __name__ == '__main__':
-    TOKEN = open('token.txt').readline()
-    client.run(TOKEN)
+    bot.run(os.getenv('TOKEN'))
