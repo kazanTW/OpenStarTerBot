@@ -9,17 +9,25 @@ bot = commands.Bot(command_prefix="$")
 @bot.event
 async def on_ready():
     print(f'Now login as: {bot.user}')
-    
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-    if message.content.startswith('Hi'):
-        tmp = message.content.split(' ', 1)
-        if len(tmp) == 1:
-            await message.channel.send(f'{message.author.mention} 請問你要說什麼？')
-        else:
-            await message.channel.send(f'{message.author.mention} 說了 「{tmp[1]}」')
+
+for FileName in os.listdir('./cmds'):
+    if FileName.endswith('.py'):
+        bot.load_extension(f'cmds.{FileName[:-3]}')
+
+@bot.command()
+async def load(ctx, extension):
+    bot.load_extension(f'cmds.{extension}')
+    await ctx.send(f'Loaded')
+
+@bot.command()
+async def reload(ctx, extension):
+    bot.reload_extension(f'cmds.{extension}')
+    await ctx.send(f'Reloaded')
+
+@bot.command()
+async def unload(ctx, extension):
+    bot.unload_extension(f'cmds.{extension}')
+    await ctx.send(f'Unloaded')
 
 # @bot.event
 # async def on_member_join(member):
